@@ -1,23 +1,23 @@
 ---
-layout: default
+layout: page
 ---
 
-<div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
+<div class="container">
+  <div class="page-header" id="banner">
+    <div class="row">
+      <div class="col-lg-8 col-md-7 col-sm-6">
+        <h1>Vidpub</h1>
+        <p class="lead">We are video, and so can you</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-4">
+        <div class="list-group table-of-contents">
+          {% for post in site.posts %}
+          <a class="list-group-item" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
