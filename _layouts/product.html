@@ -1,10 +1,10 @@
 ---
 layout: default
 ---
-<div class="container" id="product" style="padding-top:80px;">
+<div class="container" id = "product" style="padding-top: 80px;display:none">
   <div class="row">
     <div class="col-md-7">
-      <img src="/img/products/{{page.image}}" alt="">
+      <img src="/img/products/{{page.image}}" alt=""/>
     </div>
     <div class="col-md-5">
       <h1>{{page.title}}</h1>
@@ -19,7 +19,18 @@ layout: default
     <div class="col-md-12" style="padding-bottom:120px;padding-top:60px">
       {{content}}
 
-      Lorem ipsum dolor sit amet consectetur adipsicing elit. Lorem ipsum dolor sit amet consectetur adipsicing elit.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam qui ducimus facilis quisquam repudiandae, hic officiis porro explicabo, ab consequatur, accusamus enim eveniet, amet repellendus saepe officia vel aliquid voluptatum?
     </div>
   </div>
 </div>
+<script>
+$(function(){
+  Vidpub.start(function(user){
+    if(Vidpub.canSeeTutorials(user)){
+      $("#product").toggle();
+    }else{
+      location.href = "/";
+    }
+  });
+})
+</script>

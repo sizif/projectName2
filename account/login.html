@@ -1,0 +1,91 @@
+---
+title: "Login or Signup"
+layout: page
+---
+<link rel="stylesheet" href="/css/login.css">
+<div class="omb_login">
+  <h3 class="omb_authTitle">Login or <a href="/account/signup">Sign up</a></h3>
+	<div class="row omb_row-sm-offset-3 omb_socialButtons">
+      <div class="col-xs-12 col-sm-6">
+      <a href="#" class="btn btn-lg btn-block omb_btn-github" id="github">
+        <i class="fa fa-github"></i>
+        <span class="hidden-xs">Github</span>
+      </a>
+    </div>
+	</div>
+
+	<div class="row omb_row-sm-offset-3 omb_loginOr">
+		<div class="col-xs-12 col-sm-6">
+			<hr class="omb_hrOr">
+			<span class="omb_spanOr">or</span>
+		</div>
+	</div>
+
+	<div class="row omb_row-sm-offset-3">
+		<div class="col-xs-12 col-sm-6">
+
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-user"></i></span>
+				<input type="text" class="form-control" id="email" placeholder="Email">
+			</div>
+			<span class="help-block"></span>
+
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+				<input  type="password" class="form-control" id="password" placeholder="Password">
+			</div>
+      <span class="help-block"></span>
+
+			<button class="btn btn-lg btn-primary btn-block" id="login">Login</button>
+      <span class="help-block" id="error" style="color:red;font-weight:bold"></span>
+		</div>
+  </div>
+</div>
+<script>
+var queryString = getUrlVars();
+if(queryString.ua_token){
+  localStorage.setItem("token", queryString.ua_token);
+  location.href = "/";
+}
+$(function(){
+
+  $("#github").on("click", function(ev){
+    ev.preventDefault();
+    Vidpub.githubLogin(function(err,res){
+      $("#error").text(err);
+    });
+  });
+
+  $("#login").on("click", function(){
+
+    Vidpub.login({
+      login: $("#email").val(),
+      password: $("#password").val()
+    }, function(err,res){
+      if(err){
+        $("#error").text(err);
+      }else{
+        location.href = "/";
+      }
+    })
+  });
+});
+function getUrlVars(){
+  var vars = [], hash;
+  var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+  for(var i = 0; i < hashes.length; i++)
+  {
+      hash = hashes[i].split('=');
+      if($.inArray(hash[0], vars)>-1)
+      {
+          vars[hash[0]]+=","+hash[1];
+      }
+      else
+      {
+          vars.push(hash[0]);
+          vars[hash[0]] = hash[1];
+      }
+  }
+  return vars;
+}
+</script>
